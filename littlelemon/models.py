@@ -1,29 +1,21 @@
 from django.db import models
-from datetime import datetime
+
 
 # Create your models here.
-class BookingTable(models.Model):
-    id = models.AutoField(primary_key=True,auto_created=True)
-    name = models.CharField(max_length=255)
-    no_of_guests = models.SmallIntegerField()
-    booking_date = models.DateField(default=datetime.now().date())
-    
-    class Meta:
-        db_table = 'BookingTable'
-        
-    
-    def __str__(self) -> str:
-        return self.name + " : "+str(self.no_of_guests)
+class Booking(models.Model):
+    first_name = models.CharField(max_length=200)
+    reservation_date = models.DateField()
+    reservation_slot = models.SmallIntegerField(default=10)
+
+    def __str__(self): 
+        return self.first_name
 
 
+# Add code to create Menu model
 class Menu(models.Model):
-    id = models.AutoField(primary_key=True,auto_created=True)
-    title = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=4,decimal_places=2)
-    inventory = models.IntegerField()
-    class Meta:
-        db_table = 'Menu'
-        
-    
-    def __str__(self) -> str:
-        return self.title + " : "+str(self.price)
+   name = models.CharField(max_length=200) 
+   price = models.IntegerField(null=False) 
+   menu_item_description = models.TextField(max_length=1000, default='') 
+
+   def __str__(self):
+      return self.name
